@@ -1,4 +1,7 @@
-.browsehappy {
+.fade-out { 
+  animation: fadeOut 2s infinite;
+  -webkit-animation: fadeOut 2s infinite;
+}.browsehappy {
   margin: 0.2em 0;
   background: #ccc;
   color: #000;
@@ -80,4 +83,19 @@ body {
   .jumbotron {
     border-bottom: 0;
   }
+}
+
+.label-as-badge {
+  border-radius: 1em;
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  float: right;
 }

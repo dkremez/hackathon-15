@@ -1,7 +1,7 @@
 class DiscountsController < ApplicationController
 
   def index
-    @discounts = Discount.all
+    @discounts = Discount.includes(:category, :addresses).all
     render json: @discounts
   end
 
