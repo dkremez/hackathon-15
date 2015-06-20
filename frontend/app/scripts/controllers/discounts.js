@@ -8,10 +8,11 @@
  * Controller of the placesApp
  */
 angular.module('placesApp')
-    .controller('DiscountsCtrl', function ($scope, Discount) {
+    .controller('DiscountsCtrl', function ($scope, Discount, filterFilter) {
         $scope.discounts = Discount.query()
 
-        $scope.hover = function(e){
-            //debugger;
+        $scope.hoverItem = function(e){
+           // here will be code that highlight item on map
         }
+
     });
