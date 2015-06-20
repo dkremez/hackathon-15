@@ -28,6 +28,11 @@ angular
         templateUrl: "views/login.html",
         controller: 'LoginCtrl'
       })
+      .state('discounts', {
+        url: '/discounts',
+        templateUrl: 'views/discounts.html',
+        controller: 'DiscountsCtrl'
+      });
 
     $urlRouterProvider.otherwise('/login');
     // $httpProvider.interceptors.push(function ($q, $rootScope) {
