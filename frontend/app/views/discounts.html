@@ -22,7 +22,15 @@
       <ui-gmap-google-map center="{ latitude: 53.9, longitude: 27.5667 }" zoom='11'
                           options="{ minZoom: '11' }">
 
-        <ui-gmap-markers models="markers" coords="'self'"></ui-gmap-marker>
+        <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" idkey="marker.id">
+          <ui-gmap-window>
+            <div>
+              <p><strong>{{ marker.title }}</strong></p>
+              <p>Скидка: {{ marker.discount }}</p>
+              <a href="{{ marker.link }}">Сайт заведения</a>
+            </div>
+          </ui-gmap-window>
+        </ui-gmap-marker>
       </ui-gmap-google-map>
     </div>
 </div>

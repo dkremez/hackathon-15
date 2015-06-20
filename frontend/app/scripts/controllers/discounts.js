@@ -26,8 +26,13 @@ angular.module('placesApp')
       for (var i = 0, length = discount.addresses.length; i < length; i++) {
         $scope.markers.push({
           id: discount.addresses[i].id,
-          latitude: discount.addresses[i].latitude,
-          longitude: discount.addresses[i].longitude
+          coords: {
+            latitude: discount.addresses[i].latitude,
+            longitude: discount.addresses[i].longitude
+          },
+          title: discount.title,
+          discount: discount.discount,
+          link: discount.link
         });
       }
     }
