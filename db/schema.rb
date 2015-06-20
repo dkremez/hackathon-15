@@ -11,23 +11,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150620090440) do
+ActiveRecord::Schema.define(version: 20150620120605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "discounts", force: :cascade do |t|
-    t.string   "title"
-    t.text     "description"
-    t.integer  "discount"
-    t.string   "link"
+  create_table "addresses", force: :cascade do |t|
     t.string   "address"
-    t.string   "type"
+    t.integer  "discount_id"
     t.float    "latitude"
     t.float    "longitude"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "addresses", ["discount_id"], name: "index_addresses_on_discount_id", using: :btree
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "discounts", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "discount"
+    t.string   "link"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "category_id"
+  end
+
+  add_index "discounts", ["category_id"], name: "index_discounts_on_category_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "username",               default: "", null: false
@@ -47,4 +63,6 @@ ActiveRecord::Schema.define(version: 20150620090440) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
+  add_foreign_key "addresses", "discounts"
+  add_foreign_key "discounts", "categories"
 end
