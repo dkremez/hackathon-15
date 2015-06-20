@@ -1,6 +1,6 @@
 class Discount < ActiveRecord::Base
   has_many :addresses
-  has_one :category
+  belongs_to :category
 
   validates :title, :description, :discount, presence: true
 end
