@@ -1,4 +1,7 @@
-.browsehappy {
+.fade-out { 
+  animation: fadeOut 2s infinite;
+  -webkit-animation: fadeOut 2s infinite;
+}.browsehappy {
   margin: 0.2em 0;
   background: #ccc;
   color: #000;

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require 'smg_api'
 class SessionsController < ApplicationController
   skip_before_action :authenticate_user_from_token!, only: [:create]
@@ -14,8 +15,6 @@ class SessionsController < ApplicationController
         new_user.password = password
         new_user.save
         @user = new_user
-      else
-        invalid_login 'SMG API: ' + smg_api.error
       end
     end
     if @user && @user.valid_password?(password)
