@@ -8,11 +8,12 @@
  * Controller of the placesApp
  */
 angular.module('placesApp')
-  .controller('DiscountsCtrl', function ($scope, Discount, $stateParams, filterFilter) {
+  .controller('DiscountsCtrl', function ($scope, Discount, $stateParams, filterFilter, $timeout) {
     $scope.discountId = $stateParams.discountId;
-    
+
     $scope.discounts = Discount.query();
-    
+    $scope.markerClick = markerClick;
+
     $scope.hoverItem = function(e){
        // here will be code that highlight item on map
     };
@@ -32,23 +33,21 @@ angular.module('placesApp')
           },
           title: discount.title,
           discount: discount.discount,
-          link: discount.link
+          link: discount.link,
+          icon: {
+            // url: discount.category.icon
+            url: "https://maps.google.com/mapfiles/kml/shapes/schools_maps.png"
+          },
+          description: discount.description
         });
       }
     }
 
-    $scope.onMarkerClicked = function(marker){
-      debugger
-    };
-
-    $scope.$watch('searchText', function(){
-      $scope.filteredDiscounts = filterFilter($scope.discounts, $scope.searchText);
-      $scope.markers = [];
-      _.map($scope.filteredDiscounts, makeMarker);
-    });
-
-
-    //$scope.filteredDiscounts = filterFilter($scope.discounts, $scope.searchText);
+    function markerClick() {
+      console.log('marker click');
+      // _.map($scope.discounts, function(discount) { discount.active = false });
+      // discount.active = true;
+    }
 
     $scope.hover = function(e) {
       //debugger;

@@ -2,7 +2,9 @@
     <div class="col-md-4 npr">
         <input ng-model="searchText" type="text" class="form-control" placeholder="Отфильтруй базар">
         <div class="list-group scrollable">
-            <a ng-href="#!/discounts/{{discount.id}}" class="list-group-item"  ng-repeat="discount in discounts | filter:searchText"
+          <a ng-href="#!/discounts/{{discount.id}}" class="list-group-item"
+             ng-repeat="discount in discounts | filter:searchText"
+             ng-class="{ 'active-discount': discount.active }"
                 ng-mouseover="hoverItem(true);"
                 ng-mouseout="hoverItem(false);"
                 index="{{$index}}">
@@ -29,7 +31,7 @@
       <ui-gmap-google-map center="{ latitude: 53.9, longitude: 27.5667 }" zoom='11'
                           options="{ minZoom: '11' }">
 
-        <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" idkey="marker.id">
+        <ui-gmap-marker ng-repeat="marker in markers | filter:searchText" coords="marker.coords" icon='marker.icon' idkey="marker.id" click="markerClick()">
           <ui-gmap-window>
             <div>
               <p><strong>{{ marker.title }}</strong></p>

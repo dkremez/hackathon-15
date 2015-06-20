@@ -116,3 +116,6 @@ body {
   overflow: scroll;
   height: 94vh;
 }
+.active-discount {
+    background-color: red;
+}
