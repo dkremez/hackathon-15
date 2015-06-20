@@ -1,9 +1,6 @@
 require 'smg_api'
-class Users::SessionsController < Devise::SessionsController
-  # GET /resource/sign_in
-  # def new
-  #   super
-  # end
+class SessionsController < ApplicationController
+  skip_before_action :authenticate_user_from_token!, only: [:create]
 
   # POST /resource/sign_in
   def create
