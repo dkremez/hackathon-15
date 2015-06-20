@@ -2,7 +2,7 @@
     <div class="col-md-4 npr">
         <input ng-model="searchText" type="text" class="form-control" placeholder="Отфильтруй базар">
         <div class="list-group">
-            <a href="#" type="button" class="list-group-item"  ng-repeat="discount in discounts | filter:searchText"
+            <a ng-href="#!/discounts/{{discount.id}}" class="list-group-item"  ng-repeat="discount in discounts | filter:searchText"
                 ng-mouseover="hoverItem(true);"
                 ng-mouseout="hoverItem(false);"
                 index="{{$index}}">
@@ -12,7 +12,13 @@
             </a>
         </div>
     </div>
-    <div class="col-md-8 npl npr">
+    <div class="col-md-8" ng-show="discountId">
+        <dir-disqus disqus-shortname="itechdiscout"
+                    disqus-identifier="{{ discountId }}"
+                    disqus-url="http://localhost:9000/{{discountId}}">
+        </dir-disqus>
+    </div>
+    <div class="col-md-8 npl npr" ng-hide="discountId">
       <ui-gmap-google-map center="{ latitude: 53.9, longitude: 27.5667 }" zoom='11'
                           options="{ minZoom: '11' }">
 

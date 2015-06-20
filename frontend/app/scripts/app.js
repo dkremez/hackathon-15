@@ -18,10 +18,12 @@ angular
     'ui.router',
     'ui.bootstrap',
     'LocalStorageModule',
-    'uiGmapgoogle-maps'
+    'uiGmapgoogle-maps',
+    'angularUtils.directives.dirDisqus'
   ])
-  .config(function($stateProvider, $urlRouterProvider, $httpProvider, $compileProvider, localStorageServiceProvider) {
-
+  .config(function($stateProvider, $urlRouterProvider, $httpProvider, $compileProvider, localStorageServiceProvider,
+                   $locationProvider) {
+    $locationProvider.hashPrefix('!')
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|map|geo|maps|tel):/);
     $stateProvider
       .state('login', {
@@ -31,6 +33,11 @@ angular
       })
       .state('discounts', {
         url: '/discounts',
+        templateUrl: 'views/discounts.html',
+        controller: 'DiscountsCtrl'
+      })
+      .state('discount', {
+        url: '/discounts/:discountId',
         templateUrl: 'views/discounts.html',
         controller: 'DiscountsCtrl'
       });
