@@ -8,8 +8,8 @@
  * Controller of the placesApp
  */
 angular.module('placesApp')
-  .controller('DiscountsCtrl', function ($scope, Discount, $stateParams) {
-    $scope.discountId = $stateParams.discountId
+  .controller('DiscountsCtrl', function ($scope, Discount, $stateParams, filterFilter) {
+    $scope.discountId = $stateParams.discountId;
     
     $scope.discounts = Discount.query();
     
@@ -31,6 +31,15 @@ angular.module('placesApp')
         });
       }
     }
+
+    $scope.$watch('searchText', function(){
+      $scope.filteredDiscounts = filterFilter($scope.discounts, $scope.searchText);
+      $scope.markers = [];
+      _.map($scope.filteredDiscounts, makeMarker);
+    });
+
+
+    //$scope.filteredDiscounts = filterFilter($scope.discounts, $scope.searchText);
 
     $scope.hover = function(e) {
       //debugger;
