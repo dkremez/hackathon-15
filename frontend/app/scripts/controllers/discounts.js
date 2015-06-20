@@ -10,4 +10,8 @@
 angular.module('placesApp')
     .controller('DiscountsCtrl', function ($scope, Discount) {
         $scope.discounts = Discount.query()
+
+        $scope.hover = function(e){
+            //debugger;
+        }
     });
