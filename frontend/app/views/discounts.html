@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 npr">
         <input ng-model="searchText" type="text" class="form-control" placeholder="Отфильтруй базар">
         <div class="list-group">
             <a href="#" type="button" class="list-group-item"  ng-repeat="discount in discounts | filter:searchText"
@@ -11,5 +11,12 @@
                 <p>{{discount.description}}</p>
             </a>
         </div>
+    </div>
+    <div class="col-md-8 npl npr">
+      <ui-gmap-google-map center="{ latitude: 53.9, longitude: 27.5667 }" zoom='11'
+                          options="{ minZoom: '11' }">
+
+        <ui-gmap-markers models="markers" coords="'self'"></ui-gmap-marker>
+      </ui-gmap-google-map>
     </div>
 </div>
