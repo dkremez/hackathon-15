@@ -21,6 +21,7 @@ angular.module('placesApp')
     $scope.markers = [];
     $scope.discounts = Discount.query(function(data) {
       _.map(data, makeMarker);
+      $scope.oldMarkers = angular.copy($scope.markers);
     });
 
     function makeMarker(discount) {
@@ -35,8 +36,8 @@ angular.module('placesApp')
           discount: discount.discount,
           link: discount.link,
           icon: {
-            // url: discount.category.icon
-            url: "https://maps.google.com/mapfiles/kml/shapes/schools_maps.png"
+             url: 'http://localhost:3000/' + discount.category.icon.icon.url,
+            //url: "https://maps.google.com/mapfiles/kml/shapes/schools_maps.png"
           },
           description: discount.description
         });
@@ -49,8 +50,14 @@ angular.module('placesApp')
       // discount.active = true;
     }
 
-    $scope.hover = function(e) {
-      //debugger;
+    $scope.activeSingle = function(discount) {
+      $scope.discountId = discount.id;
+      $scope.markers = filterFilter($scope.oldMarkers, {title: discount.title})
+    };
+
+    $scope.showAll = function(){
+      $scope.discountId = null;
+      $scope.markers = angular.copy($scope.oldMarkers)
     };
 
 });
