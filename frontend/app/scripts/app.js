@@ -45,23 +45,11 @@ angular
         request: function (config) {
           if (localStorageService.get('access_token')) {
             try {
-              var t = localStorageService.access_token;
+              var t = localStorageService.get('access_token');
               config.headers.Authorization = t;
             } catch (err) {localStorageService.clearAll(); console.warn('local storage err in config');}
           }
           return config;
-        },
-
-        response: function (result) {
-          return result;
-        },
-
-        responseError: function (rejection) {
-          if (rejection.status === 401) {
-            console.log('Failed with', rejection.status, 'status');
-            $rootScope.$broadcast('request:rejected');
-          }
-          return $q.reject(rejection);
         }
       };
     });

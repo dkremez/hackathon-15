@@ -25,7 +25,7 @@ angular.module('placesApp')
       UserService.login({ user: form.user })
         .then(function(data) {
           localStorageService.set('access_token', data.access_token);
-          // $state.go('/main');
+          $state.go('discounts');
         })
         .catch(function(data) {
           var alert = { type: 'danger', msg: data.error };
