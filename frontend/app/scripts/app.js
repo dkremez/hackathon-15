@@ -30,10 +30,6 @@ angular
       })
 
     $urlRouterProvider.otherwise('/login');
-    $httpProvider.defaults.useXDomain = true;
-
-    delete $httpProvider.defaults.headers.common['X-Requested-With'];
-
     // $httpProvider.interceptors.push(function ($q, $rootScope) {
     //   return {
     //     request: function (config) {
@@ -59,4 +55,8 @@ angular
     //     }
     //   };
     // });
-  }) ;
+  })
+  .constant('ENV', {
+    'apiEndpoint': 'http://localhost:3000'
+  });
+

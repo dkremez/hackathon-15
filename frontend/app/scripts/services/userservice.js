@@ -8,8 +8,8 @@
  * Service in the placesApp.
  */
 angular.module('placesApp')
-  .service('UserService', function ($http, $q) {
-    var serverBaseURL = 'localhost:3000';
+  .service('UserService', function ($http, $q, ENV) {
+    var serverBaseURL = ENV.apiEndpoint;
     var gen = function(method, url, data) {
       return $q(function(resolve, reject) {
         var q = {
