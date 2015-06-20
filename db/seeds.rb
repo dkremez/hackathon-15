@@ -6,6 +6,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+# Categories
+Category.create name: 'Бары и пабы'
+Category.create name: 'Туризм'
+Category.create name: 'Курсы иностранных языков'
+
 # Discounts
 Discount.create title: 'Bar 13', description: 'Bar 13 - необычная смесь барного и клубного формата в центре Минска. Изысканная авторская кухня, качественная музыка и особая атмосфера.', discount: '-13%', link: 'http://bar13.relax.by/', type: nil
 Discount.create title: 'The Pub', description: '«The Pub» - место, которое умеет развеивать мифы. Один из самых необычных пабов города на улице К. Маркса удивляет фестивальным меню различных стран.', discount: '-15%', link: 'http://the-pub.relax.by/', type: nil
@@ -45,6 +50,3 @@ Discount.where(title: 'Tez tour').first.addresses.create(address: 'г. Минс�
 Discount.where(title: 'Tez tour').first.addresses.create(address: 'г. Минск, Толбухина, 2')
 Discount.where(title: 'Streamline').first.addresses.create(address: 'г. Минск, ул. Романовская слобода, 13')
 Discount.where(title: 'Streamline').first.addresses.create(address: 'г. Минск, пер. Броневой, 11')
-
-
-
