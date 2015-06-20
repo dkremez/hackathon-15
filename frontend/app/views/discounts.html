@@ -6,9 +6,16 @@
                 ng-mouseover="hoverItem(true);"
                 ng-mouseout="hoverItem(false);"
                 index="{{$index}}">
-                <span class="label label-success label-as-badge">{{discount.discount}}</span>
                 <b>{{discount.title}}</b>
-                <p>{{discount.description}}</p>
+                <span class="label label-success label-as-badge">{{discount.discount}}</span>
+                <div class="row">
+                    <div class="col-md-3 npr">
+                        <img ng-src="http://localhost:3000/{{discount.image.image.thumb.url}}" alt="..." height="70" width="70">
+                    </div>
+                    <div class="col-md-9 npl">
+                        <p>{{discount.description}}</p>
+                    </div>
+                </div>
             </a>
         </div>
     </div>
