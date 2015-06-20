@@ -70,6 +70,7 @@ pickle-email-*.html
 /assets/node_modules
 # Textmate project files
 /*.tmproj
+public/uploads
 
 # vim artifacts
 **.swp
