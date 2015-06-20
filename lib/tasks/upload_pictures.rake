@@ -19,4 +19,19 @@ namespace :image_upload do
 
   desc "upload all default images"
   task :all => [:default_discount_pictures, :default_category_pictures]
+
+  desc "upload category icons"
+  task :icons  => :environment do
+    ICONS = Hash.new("map_icon_std")
+    ICONS.merge!({
+        "Туризм" => 'map_icon_flag_orange',
+        "Бары и пабы" => 'map_icon_violet'
+    })
+
+    Category.all.each do |category|
+      default_image = File.open("app/assets/images/#{ICONS[category.name]}.svg")
+      category.icon = default_image
+      category.save
+    end
+  end
 end

@@ -37,6 +37,10 @@ angular.module('placesApp')
       }
     }
 
+    $scope.onMarkerClicked = function(marker){
+      debugger
+    };
+
     $scope.$watch('searchText', function(){
       $scope.filteredDiscounts = filterFilter($scope.discounts, $scope.searchText);
       $scope.markers = [];
