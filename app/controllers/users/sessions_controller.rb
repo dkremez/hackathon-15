@@ -21,7 +21,7 @@ class Users::SessionsController < Devise::SessionsController
         invalid_login 'SMG API: ' + smg_api.error
       end
     end
-    if @user.valid_password?(password)
+    if @user && @user.valid_password?(password)
       sign_in :user, @user
       render json: @user, serializer: SessionSerializer, root: nil
     else
