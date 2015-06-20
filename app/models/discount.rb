@@ -1,6 +1,6 @@
 class Discount < ActiveRecord::Base
-  geocoded_by :address
-  after_validation :geocode
+  has_many :addresses
 
-  validates :title, :description, :discount, :address
+
+  validates :title, :description, :discount, presence: true
 end
