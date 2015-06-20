@@ -6,6 +6,7 @@ class DiscountsController < ApplicationController
   end
 
   def show
-
+    @discount = Discount.find params[:id]
+    render json: @discount
   end
 end

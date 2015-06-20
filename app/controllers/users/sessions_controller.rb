@@ -9,24 +9,31 @@ class Users::SessionsController < Devise::SessionsController
   def create
     username = params['user']['username']
     password = params['user']['password']
-    user = User.find_by(username: username)
-    unless user
+    @user = User.find_by(username: username)
+    unless @user
       smg_api = SmgApi.new(username, password)
       if smg_api.user_valid?
         new_user = User.new(username: username)
         new_user.password = password
         new_user.save
+        @user = new_user
       else
-        throw :warden, message: 'SMG API: ' + smg_api.error
+        invalid_login 'SMG API: ' + smg_api.error
       end
     end
-    super
+    if @user.valid_password?(password)
+      sign_in :user, @user
+      render json: @user, serializer: SessionSerializer, root: nil
+    else
+      invalid_login 'Неверный логин или пароль.'
+    end
   end
 
   # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+  def destroy
+    warden.logout
+    head :no_content
+  end
 
   # protected
 
@@ -34,4 +41,11 @@ class Users::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.for(:sign_in) << :attribute
   # end
+  private
+
+    def invalid_login message
+      warden.custom_failure!
+      render json: {error: message}, status: :unprocessable_entity
+    end
+
 end
