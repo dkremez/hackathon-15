@@ -53,6 +53,7 @@ gem 'thin'
 gem 'upmin-admin'
 gem 'geocoder'
 gem 'carrierwave'
+gem 'rmagick'
 gem 'active_model_serializers', '~> 0.8.0'
 gem 'rack-cors', :require => 'rack/cors'
 

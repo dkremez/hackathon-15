@@ -18,6 +18,7 @@ angular
     'ui.router',
     'ui.bootstrap',
     'LocalStorageModule',
+    'uiGmapgoogle-maps',
     'angularUtils.directives.dirDisqus'
   ])
   .config(function($stateProvider, $urlRouterProvider, $httpProvider, $compileProvider, localStorageServiceProvider,
@@ -43,12 +44,9 @@ angular
 
     $urlRouterProvider.otherwise('/login');
 
-
-    //$disqusProvider.setShortname('itechdiscout');
-
     localStorageServiceProvider
       .setPrefix('placesApp')
-      .setStorageType('sessionStorage');
+      .setStorageType('localStorage');
 
     $httpProvider.interceptors.push(function ($q, $rootScope, localStorageService) {
       return {

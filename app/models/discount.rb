@@ -3,4 +3,5 @@ class Discount < ActiveRecord::Base
   belongs_to :category
 
   validates :title, :description, :discount, presence: true
+  mount_uploader :image, ImageUploader
 end
