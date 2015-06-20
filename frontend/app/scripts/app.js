@@ -17,7 +17,8 @@ angular
     'ngTouch',
     'ui.router',
     'ui.bootstrap',
-    'LocalStorageModule'
+    'LocalStorageModule',
+    'uiGmapgoogle-maps'
   ])
   .config(function($stateProvider, $urlRouterProvider, $httpProvider, $compileProvider, localStorageServiceProvider) {
 
@@ -38,7 +39,7 @@ angular
 
     localStorageServiceProvider
       .setPrefix('placesApp')
-      .setStorageType('sessionStorage');
+      .setStorageType('localStorage');
 
     $httpProvider.interceptors.push(function ($q, $rootScope, localStorageService) {
       return {

@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-4 npr">
         <ul class="list-group">
             <li class="list-group-item" ng-mouseover="hover()" ng-repeat="discount in discounts">
                 <span class="label label-success label-as-badge">{{discount.discount}}</span>
@@ -7,5 +7,12 @@
                 <p>{{discount.description}}</p>
             </li>
         </ul>
+    </div>
+    <div class="col-md-8 npl npr">
+      <ui-gmap-google-map center="{ latitude: 53.9, longitude: 27.5667 }" zoom='11'
+                          options="{ minZoom: '11' }">
+
+        <ui-gmap-markers models="markers" coords="'self'"></ui-gmap-marker>
+      </ui-gmap-google-map>
     </div>
 </div>
