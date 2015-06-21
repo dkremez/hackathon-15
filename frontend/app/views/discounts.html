@@ -4,7 +4,7 @@
             <div class="input-group-btn">
                 <select class="form-group btn" ng-model="selectedCategory" style="width: 100px;"
                         ng-options="category.name for category in categories track by category.name">
-                    <option value="" disabled>Катугории</option>
+                    <option value="" disabled>Катeгории</option>
                 </select>
             </div>
             <input ng-model="searchText" type="text" class="form-control col-md-6" placeholder="Отфильтруй">
@@ -40,7 +40,7 @@
     <div class="col-md-8 npl npr">
       <ui-gmap-google-map center="{ latitude: 53.9, longitude: 27.5667 }" zoom='12'
                           options="{ minZoom: '11' }">
-        <ui-gmap-marker ng-repeat="marker in markers | filter:searchText | filter: {category: selectedCategory}" coords="marker.coords" icon='marker.icon' idkey="marker.id" click="markerClick()">
+        <ui-gmap-marker ng-repeat="marker in markers | filter:searchText | filter: {category: selectedCategory.name}" coords="marker.coords" icon='marker.icon' idkey="marker.id" click="markerClick()">
           <ui-gmap-window>
             <div>
               <p><strong>{{ marker.title }}</strong></p>

@@ -36,7 +36,7 @@ angular.module('placesApp')
           },
           title: discount.title,
           discount: discount.discount,
-          category: discount.category,
+          category: discount.category.name,
           link: discount.link,
           icon: {
              url: ENV.apiEndpoint + discount.category.icon.icon.url,
