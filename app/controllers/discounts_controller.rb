@@ -1,7 +1,7 @@
 class DiscountsController < ApplicationController
 
   def index
-    @discounts = Discount.includes(:category, :addresses).order(:title).all
+    @discounts = Discount.includes(:category, :addresses).order(title: :asc).all
     render json: @discounts
   end
 
