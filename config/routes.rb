@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'rates/create'
+
   devise_for :user, only: []
 
   resource :login, only: [:create], controller: :sessions
@@ -7,6 +9,7 @@ Rails.application.routes.draw do
   resource :sign_out, only: [:destroy], controller: :sessions
 
   resources :discounts
+  resources :rates, only: [:create]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :rememberable, :trackable
 
+  has_many :rates
+
   validates :username, :presence => true, :uniqueness => { :case_sensitive => false }
 
   after_create :update_access_token!
