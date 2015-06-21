@@ -1,3 +1,3 @@
 class AddressSerializer < ActiveModel::Serializer
-  attributes :id, :address, :latitude, :longitude, :discount_id
+  attributes :id, :address, :latitude, :longitude, :discount_id, :foursquare_venue
 end

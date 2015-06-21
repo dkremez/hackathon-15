@@ -15,11 +15,10 @@
         <div class="list-group scrollable">
           <button class="list-group-item"
                 ng-repeat="discount in discounts | filter:searchText  | filter: {category: selectedCategory}"
-                ng-mouseover="hoverItem(true);"
-                ng-mouseout="hoverItem(false);"
+                ng-class="discount.just_created ? 'list-group-item-info' : ''"
                 index="{{$index}}">
                 <div ng-click="activeSingle(discount)" ng-dblclick="activeSingle(discount)">
-                    <b>{{discount.title}}</b>
+                    <b>{{discount.title}} </b>{{discount.just_created ? '(Hoвый)' : ''}}
                     <span class="label label-success label-as-badge">{{discount.discount}}</span>
                     <div class="row">
                         <div class="col-md-3 npr">
@@ -32,9 +31,13 @@
                 </div>
                 <ul class="list-unstyled" ng-show="discountId == discount.id">
                     <li ng-repeat="address in discount.addresses">
-                        <a ng-href="#!/address/{{address.id}}">{{address.address}}</a>
+                        <a ng-href="#!/address/{{address.id}}?venue={{ address.foursquare_venue }}">{{address.address}}</a>
                     </li>
                 </ul>
+                <rating ng-model="discount.rating" max="10" readonly="discount.ratingable"
+                        on-hover="hoveringOver(value)"
+                        ng-click="saveRating(discount)">
+                </rating> <b>(<i>Рейтинг:</i> {{discount.rating}})</b>
             </button>
         </div>
     </div>

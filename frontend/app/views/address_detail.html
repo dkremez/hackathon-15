@@ -1,16 +1,14 @@
+<carousel interval="1" style="height: 400px">
+  <slide ng-repeat="slide in slides" active="slide.active">
+    <img ng-src="{{ slide.prefix + 'width' + slide.width + slide.suffix }}" style="margin:auto;height: 400px">
+  </slide>
+</carousel>
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
-        <carousel interval="5000">
-            <slide ng-repeat="slide in slides" active="slide.active">
-                <img ng-src="{{slide.image}}" style="margin:auto;">
-                <div class="carousel-caption">
-                </div>
-            </slide>
-        </carousel>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-8 col-md-offset-2">
+      <br/><br/>
+        <p style="font-size: 22px" class="pull-right">
+            <rating ng-model="foursquare.venue.rating" max="10" readonly="true"> </rating> 
+        </p>
         <h1>
             {{discount.title}}
             <div style="font-size: 36px">
@@ -18,14 +16,17 @@
             </div>
         </h1>
         <p>{{discount.description}}</p>
-        <p>{{address.address}}</p>
-        <a ng-href="discount.link">{{discount.link}}</a>
-        <hr/>
-        <p style="font-size: 22px">
-            <rating ng-model="discount.rating" max="10" readonly="discount.ratingable"
-                    on-hover="hoveringOver(value)"
-                    ng-click="saveRating(discount)">
-            </rating> <b>(<i>Рейтинг:</i> {{discount.rating}})</b>
+        <p>
+          <span class="glyphicon glyphicon-phone"></span>
+          {{ foursquare.venue.contact.formattedPhone }} 
+        </p>
+        <p>
+          <span class="glyphicon glyphicon-home"></span>
+          {{address.address}}
+        </p>
+        <p>
+          <span class="glyphicon glyphicon-link"></span>
+          <a ng-href="discount.link">{{discount.link}}</a>
         </p>
         <hr/>
     </div>
