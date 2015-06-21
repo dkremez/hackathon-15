@@ -50,7 +50,6 @@ angular.module('placesApp')
 
     function markerClick() {
       console.log('marker click');
-      // _.map($scope.discounts, function(discount) { discount.active = false });
       // discount.active = true;
     }
 

@@ -38,7 +38,7 @@ angular
         controller: 'DiscountsCtrl'
       })
       .state('address', {
-        url: '/address/:id',
+        url: '/address/:id?venue',
         templateUrl: 'views/address_detail.html',
         controller: 'AddressDetailCtrl'
       });
@@ -52,6 +52,9 @@ angular
     $httpProvider.interceptors.push(function ($q, $rootScope, localStorageService) {
       return {
         request: function (config) {
+          if(_.startsWith(config.url, 'https://api.foursquare')) {
+            return config;
+          }
           if (localStorageService.get('access_token')) {
             try {
               var t = localStorageService.get('access_token');

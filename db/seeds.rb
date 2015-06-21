@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 Address.delete_all
 Discount.delete_all
 Category.delete_all
@@ -22,16 +23,16 @@ Category.where(name: 'Туризм').first.discounts.create title: 'Tez tour', d
 Category.where(name: 'Курсы иностранных языков').first.discounts.create title: 'Streamline', description: 'В Streamline преподается восемь языков в соответствии с международными стандартами качества и с использованием самых современных технологий обучения.', discount: 'до 25%', link: 'http://www.str.by/'
 
 # Discounts addresses
-Discount.where(title: 'Bar 13').first.addresses.create(address: 'г. Минск, ул. Красная, 13')
-Discount.where(title: 'The Pub').first.addresses.create(address: 'г. Минск, ул. К. Маркса, 6')
-Discount.where(title: 'BEERжа').first.addresses.create(address: 'г. Минск, ул. Толстого, 10')
-Discount.where(title: 'BEERжа').first.addresses.create(address: 'г. Минск, пр-т Независимости, 40')
-Discount.where(title: 'BEERжа').first.addresses.create(address: 'г. Минск, ул. Нарочанская, 6')
-Discount.where(title: 'BierKeller').first.addresses.create(address: 'г. Минск, пер. Войсковой, 12')
-Discount.where(title: 'Гамбринус').first.addresses.create(address: 'г. Минск, пл. Свободы, 2')
-Discount.where(title: 'Староместный пивовар').first.addresses.create(address: 'г. Минск, ул. Герцена, 4')
-Discount.where(title: 'Староместный пивовар').first.addresses.create(address: 'г. Минск, ул. К. Маркса, 21')
-Discount.where(title: 'Староместный пивовар').first.addresses.create(address: 'г. Минск, ул. Кирилла и Мефодия, 21')
+Discount.where(title: 'Bar 13').first.addresses.create(address: 'г. Минск, ул. Красная, 13', foursquare_venue: '506daab3e4b09e74d87170a3')
+Discount.where(title: 'The Pub').first.addresses.create(address: 'г. Минск, ул. К. Маркса, 6', foursquare_venue: '5284d25d11d23e7a0f8c2e1d')
+Discount.where(title: 'BEERжа').first.addresses.create(address: 'г. Минск, ул. Толстого, 10', foursquare_venue: '54574576498ef9544865709c')
+Discount.where(title: 'BEERжа').first.addresses.create(address: 'г. Минск, пр-т Независимости, 40', foursquare_venue: '535a17dc498e235672d7eb31')
+Discount.where(title: 'BEERжа').first.addresses.create(address: 'г. Минск, ул. Нарочанская, 6', foursquare_venue: '535649bf498ed96e4')
+Discount.where(title: 'BierKeller').first.addresses.create(address: 'г. Минск, пер. Войсковой, 12', foursquare_venue: '4ef4e1c6a17cd725e3af9f80')
+Discount.where(title: 'Гамбринус').first.addresses.create(address: 'г. Минск, пл. Свободы, 2', foursquare_venue: '50b8773845b0c6778ced5f6d')
+Discount.where(title: 'Староместный пивовар').first.addresses.create(address: 'г. Минск, ул. Герцена, 4', foursquare_venue: '510c115ee4b01a7ab9a8b04e')
+Discount.where(title: 'Староместный пивовар').first.addresses.create(address: 'г. Минск, ул. К. Маркса, 21', foursquare_venue: '52e0f42811d23a0e9f5ec395')
+Discount.where(title: 'Староместный пивовар').first.addresses.create(address: 'г. Минск, ул. Кирилла и Мефодия, 21', foursquare_venue: '542eb596498efb6b9c8d0ba4')
 Discount.where(title: 'Первая туристическая компания').first.addresses.create(address: 'г. Минск, пр. Независимости 11/2, 1-й этаж, офис 8')
 Discount.where(title: 'Первая туристическая компания').first.addresses.create(address: 'г. Минск, ТЦ "Замок", пр. Победителей 65, 4-й этаж')
 Discount.where(title: 'МалибуТрэвел').first.addresses.create(address: 'г. Минск, ул. П. Мстиславца д.20 офис 222')
