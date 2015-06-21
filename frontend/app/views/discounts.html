@@ -34,10 +34,6 @@
                         <a ng-href="#!/address/{{address.id}}?venue={{ address.foursquare_venue }}">{{address.address}}</a>
                     </li>
                 </ul>
-                <rating ng-model="discount.rating" max="10" readonly="discount.ratingable"
-                        on-hover="hoveringOver(value)"
-                        ng-click="saveRating(discount)">
-                </rating> <b>(<i>Рейтинг:</i> {{discount.rating}})</b>
             </button>
         </div>
     </div>
