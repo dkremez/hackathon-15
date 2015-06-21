@@ -8,8 +8,7 @@
  * Controller of the placesApp
  */
 angular.module('placesApp')
-  .controller('DiscountsCtrl', function ($scope, Discount, $stateParams, filterFilter, ENV, $http) {
-    $scope.discountId = $stateParams.discountId;
+  .controller('DiscountsCtrl', function ($scope, Discount, $stateParams, filterFilter, ENV, $http, $location) {
 
     $scope.markerClick = markerClick;
 
@@ -36,7 +35,7 @@ angular.module('placesApp')
           discount: discount.discount,
           link: discount.link,
           icon: {
-             url: 'http://localhost:3000/' + discount.category.icon.icon.url,
+             url: ENV.apiEndpoint + discount.category.icon.icon.url,
             //url: "https://maps.google.com/mapfiles/kml/shapes/schools_maps.png"
           },
           description: discount.description,
@@ -53,7 +52,8 @@ angular.module('placesApp')
 
     $scope.activeSingle = function(discount) {
       $scope.discountId = discount.id;
-      $scope.markers = filterFilter($scope.oldMarkers, {title: discount.title})
+      $scope.markers = filterFilter($scope.oldMarkers, {title: discount.title});
+      discount.showAddress = true
     };
 
     $scope.showAll = function(){
@@ -65,13 +65,8 @@ angular.module('placesApp')
       $scope.currentRating = value;
     };
 
-    $scope.saveRating = function(discount){
-      $http.post(ENV.apiEndpoint + '/rates', {discount_id: discount.id, rating: $scope.currentRating}).then(function(result){
-        discount = result.data
-        discount.ratingable = false;
-      }, function(){
-
-      });
-    }
+    $scope.showDetail = function(address){
+      $location.path("/address/"+address.id)
+    };
 
 });
