@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   get 'address/show'
-
   get 'rates/create'
-
+  
   devise_for :user, only: []
 
   resource :login, only: [:create], controller: :sessions
