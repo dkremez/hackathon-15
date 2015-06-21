@@ -39,7 +39,8 @@ angular.module('placesApp')
              url: 'http://localhost:3000/' + discount.category.icon.icon.url,
             //url: "https://maps.google.com/mapfiles/kml/shapes/schools_maps.png"
           },
-          description: discount.description
+          description: discount.description,
+          address: discount.addresses[i].address
         });
       }
     }
