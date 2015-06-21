@@ -12,24 +12,29 @@
                 ng-class="discountId == discount.id ? 'active' : ''"
                 ng-mouseover="hoverItem(true);"
                 ng-mouseout="hoverItem(false);"
-                ng-click="activeSingle(discount)"
                 index="{{$index}}">
-                <b>{{discount.title}}</b>
-                <span class="label label-success label-as-badge">{{discount.discount}}</span>
-                <div class="row">
-                    <div class="col-md-3 npr">
-                        <img ng-src="http://localhost:3000/{{discount.image.image.thumb.url}}" alt="..." height="70" width="70">
-                    </div>
-                    <div class="col-md-9 npl">
-                        <p>{{discount.description}}
-                        </p>
+                <div ng-click="activeSingle(discount)">
+                    <b>{{discount.title}}</b>
+                    <span class="label label-success label-as-badge">{{discount.discount}}</span>
+                    <div class="row">
+                        <div class="col-md-3 npr">
+                            <img ng-src="http://localhost:3000/{{discount.image.image.thumb.url}}" alt="..." height="70" width="70">
+                        </div>
+                        <div class="col-md-9 npl">
+                            <p>{{discount.description}}</p>
+
+                        </div>
                     </div>
                 </div>
+                <rating ng-model="discount.rating" max="10" readonly="discount.ratingable"
+                        on-hover="hoveringOver(value)"
+                        ng-click="saveRating(discount)">
+                </rating> <b>(<i>Рейтинг:</i> {{discount.rating}})</b>
             </button>
         </div>
     </div>
     <div class="col-md-8 npl npr">
-      <ui-gmap-google-map center="{ latitude: 53.9, longitude: 27.5667 }" zoom='11'
+      <ui-gmap-google-map center="{ latitude: 53.9, longitude: 27.5667 }" zoom='12'
                           options="{ minZoom: '11' }">
         <ui-gmap-marker ng-repeat="marker in markers | filter:searchText" coords="marker.coords" icon='marker.icon' idkey="marker.id" click="markerClick()">
           <ui-gmap-window>

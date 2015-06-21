@@ -19,7 +19,8 @@ angular
     'ui.bootstrap',
     'LocalStorageModule',
     'uiGmapgoogle-maps',
-    'angularUtils.directives.dirDisqus'
+    'angularUtils.directives.dirDisqus',
+    'ui.bootstrap'
   ])
   .config(function($stateProvider, $urlRouterProvider, $httpProvider, $compileProvider, localStorageServiceProvider,
                    $locationProvider) {

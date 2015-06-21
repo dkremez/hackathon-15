@@ -8,10 +8,9 @@
  * Controller of the placesApp
  */
 angular.module('placesApp')
-  .controller('DiscountsCtrl', function ($scope, Discount, $stateParams, filterFilter, $timeout) {
+  .controller('DiscountsCtrl', function ($scope, Discount, $stateParams, filterFilter, ENV, $http) {
     $scope.discountId = $stateParams.discountId;
 
-    $scope.discounts = Discount.query();
     $scope.markerClick = markerClick;
 
     $scope.hoverItem = function(e){
@@ -19,8 +18,9 @@ angular.module('placesApp')
     };
 
     $scope.markers = [];
-    $scope.discounts = Discount.query(function(data) {
+    Discount.query(function(data) {
       _.map(data, makeMarker);
+      $scope.discounts = data
       $scope.oldMarkers = angular.copy($scope.markers);
     });
 
@@ -60,5 +60,18 @@ angular.module('placesApp')
       $scope.discountId = null;
       $scope.markers = angular.copy($scope.oldMarkers)
     };
+
+    $scope.hoveringOver = function(value) {
+      $scope.currentRating = value;
+    };
+
+    $scope.saveRating = function(discount){
+      $http.post(ENV.apiEndpoint + '/rates', {discount_id: discount.id, rating: $scope.currentRating}).then(function(result){
+        discount = result.data
+        discount.ratingable = false;
+      }, function(){
+
+      });
+    }
 
 });
