@@ -111,3 +111,11 @@ body {
 .npr {
   padding-right: 0 !important;
 }
+
+.scrollable {
+  overflow: scroll;
+  height: 94vh;
+}
+.active-discount {
+    background-color: red;
+}
