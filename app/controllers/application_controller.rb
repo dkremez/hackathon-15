@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   # before_action :authenticate_user_from_token!
 
-  respond_to :json
+  respond_to :json, :html
   
   protected
 
@@ -23,6 +23,10 @@ class ApplicationController < ActionController::Base
     else
       authentication_error
     end
+  end
+
+  def authenticate_admin_user!
+    redirect_to "/" unless current_user.try(:admin)
   end
 
   private
