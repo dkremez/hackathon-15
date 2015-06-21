@@ -19,6 +19,9 @@ angular.module('placesApp')
     $scope.markers = [];
     Discount.query(function(data) {
       _.map(data, makeMarker);
+      $scope.categories = _.uniq(_.map(data, function(d){
+        return d.category
+      }), false, function(a){ return a.id;});
       $scope.discounts = data
       $scope.oldMarkers = angular.copy($scope.markers);
     });
@@ -33,6 +36,7 @@ angular.module('placesApp')
           },
           title: discount.title,
           discount: discount.discount,
+          category: discount.category,
           link: discount.link,
           icon: {
              url: ENV.apiEndpoint + discount.category.icon.icon.url,
@@ -56,8 +60,10 @@ angular.module('placesApp')
       discount.showAddress = true
     };
 
-    $scope.showAll = function(){
+    $scope.reset = function(){
       $scope.discountId = null;
+      $scope.searchText = undefined;
+      $scope.selectedCategory = undefined;
       $scope.markers = angular.copy($scope.oldMarkers)
     };
 
