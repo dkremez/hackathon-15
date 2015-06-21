@@ -37,10 +37,10 @@ angular
         templateUrl: 'views/discounts.html',
         controller: 'DiscountsCtrl'
       })
-      .state('discount', {
-        url: '/discounts/:discountId',
-        templateUrl: 'views/discounts.html',
-        controller: 'DiscountsCtrl'
+      .state('address', {
+        url: '/address/:id',
+        templateUrl: 'views/address_detail.html',
+        controller: 'AddressDetailCtrl'
       });
 
     $urlRouterProvider.otherwise('/login');
