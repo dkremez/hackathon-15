@@ -8,10 +8,8 @@
  * Controller of the placesApp
  */
 angular.module('placesApp')
-  .controller('DiscountsCtrl', function ($scope, Discount, $stateParams, filterFilter, $timeout) {
-    $scope.discountId = $stateParams.discountId;
+  .controller('DiscountsCtrl', function ($scope, Discount, $stateParams, filterFilter, ENV, $http, $location) {
 
-    $scope.discounts = Discount.query();
     $scope.markerClick = markerClick;
 
     $scope.hoverItem = function(e){
@@ -19,8 +17,12 @@ angular.module('placesApp')
     };
 
     $scope.markers = [];
-    $scope.discounts = Discount.query(function(data) {
+    Discount.query(function(data) {
       _.map(data, makeMarker);
+      $scope.categories = _.uniq(_.map(data, function(d){
+        return d.category
+      }), false, function(a){ return a.id;});
+      $scope.discounts = data
       $scope.oldMarkers = angular.copy($scope.markers);
     });
 
@@ -34,9 +36,10 @@ angular.module('placesApp')
           },
           title: discount.title,
           discount: discount.discount,
+          category: discount.category,
           link: discount.link,
           icon: {
-             url: 'http://localhost:3000/' + discount.category.icon.icon.url,
+             url: ENV.apiEndpoint + discount.category.icon.icon.url,
             //url: "https://maps.google.com/mapfiles/kml/shapes/schools_maps.png"
           },
           description: discount.description,
@@ -53,12 +56,23 @@ angular.module('placesApp')
 
     $scope.activeSingle = function(discount) {
       $scope.discountId = discount.id;
-      $scope.markers = filterFilter($scope.oldMarkers, {title: discount.title})
+      $scope.markers = filterFilter($scope.oldMarkers, {title: discount.title});
+      discount.showAddress = true
     };
 
-    $scope.showAll = function(){
+    $scope.reset = function(){
       $scope.discountId = null;
+      $scope.searchText = undefined;
+      $scope.selectedCategory = undefined;
       $scope.markers = angular.copy($scope.oldMarkers)
+    };
+
+    $scope.hoveringOver = function(value) {
+      $scope.currentRating = value;
+    };
+
+    $scope.showDetail = function(address){
+      $location.path("/address/"+address.id)
     };
 
 });

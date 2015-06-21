@@ -1,37 +1,47 @@
 <div class="row">
     <div class="col-md-4 npr">
-        <div class="input-group">
-            <input ng-model="searchText" type="text" class="form-control" placeholder="Отфильтруй">
+        <form class="input-group col-md-12">
+            <div class="input-group-btn">
+                <select class="form-group btn" ng-model="selectedCategory" style="width: 100px;"
+                        ng-options="category.name for category in categories track by category.name">
+                    <option value="" disabled>Катугории</option>
+                </select>
+            </div>
+            <input ng-model="searchText" type="text" class="form-control col-md-6" placeholder="Отфильтруй">
             <span class="input-group-btn">
-                <button class="btn btn-primary" type="button" ng-click="showAll()">Показать все.</button>
+                <button class="btn btn-primary" type="button" ng-click="reset()">Все.</button>
             </span>
-        </div>
+        </form>
         <div class="list-group scrollable">
           <button class="list-group-item"
-                ng-repeat="discount in discounts | filter:searchText"
-                ng-class="discountId == discount.id ? 'active' : ''"
+                ng-repeat="discount in discounts | filter:searchText  | filter: {category: selectedCategory}"
                 ng-mouseover="hoverItem(true);"
                 ng-mouseout="hoverItem(false);"
-                ng-click="activeSingle(discount)"
                 index="{{$index}}">
-                <b>{{discount.title}}</b>
-                <span class="label label-success label-as-badge">{{discount.discount}}</span>
-                <div class="row">
-                    <div class="col-md-3 npr">
-                        <img ng-src="http://localhost:3000/{{discount.image.image.thumb.url}}" alt="..." height="70" width="70">
-                    </div>
-                    <div class="col-md-9 npl">
-                        <p>{{discount.description}}
-                        </p>
+                <div ng-click="activeSingle(discount)" ng-dblclick="activeSingle(discount)">
+                    <b>{{discount.title}}</b>
+                    <span class="label label-success label-as-badge">{{discount.discount}}</span>
+                    <div class="row">
+                        <div class="col-md-3 npr">
+                            <img ng-src="http://localhost:3000/{{discount.image.image.thumb.url}}" alt="..." height="70" width="70">
+                        </div>
+                        <div class="col-md-9 npl">
+                            <p>{{discount.description}}</p>
+                        </div>
                     </div>
                 </div>
+                <ul class="list-unstyled" ng-show="discountId == discount.id">
+                    <li ng-repeat="address in discount.addresses">
+                        <a ng-href="#!/address/{{address.id}}">{{address.address}}</a>
+                    </li>
+                </ul>
             </button>
         </div>
     </div>
     <div class="col-md-8 npl npr">
-      <ui-gmap-google-map center="{ latitude: 53.9, longitude: 27.5667 }" zoom='11'
+      <ui-gmap-google-map center="{ latitude: 53.9, longitude: 27.5667 }" zoom='12'
                           options="{ minZoom: '11' }">
-        <ui-gmap-marker ng-repeat="marker in markers | filter:searchText" coords="marker.coords" icon='marker.icon' idkey="marker.id" click="markerClick()">
+        <ui-gmap-marker ng-repeat="marker in markers | filter:searchText | filter: {category: selectedCategory}" coords="marker.coords" icon='marker.icon' idkey="marker.id" click="markerClick()">
           <ui-gmap-window>
             <div>
               <p><strong>{{ marker.title }}</strong></p>

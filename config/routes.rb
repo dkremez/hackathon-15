@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+  get 'address/show'
+  get 'rates/create'
+  
   devise_for :user, only: []
 
   resource :login, only: [:create], controller: :sessions
@@ -8,7 +11,9 @@ Rails.application.routes.draw do
   resource :logout, only: [:destroy], controller: :sessions
   resource :sign_out, only: [:destroy], controller: :sessions
 
-  resources :discounts
+  resources :discounts, only: [:index, :show]
+  resources :address, only: [:show]
+  resources :rates, only: [:create]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

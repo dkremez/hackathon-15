@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <carousel interval="5000">
+            <slide ng-repeat="slide in slides" active="slide.active">
+                <img ng-src="{{slide.image}}" style="margin:auto;">
+                <div class="carousel-caption">
+                </div>
+            </slide>
+        </carousel>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h1>
+            {{discount.title}}
+            <div style="font-size: 36px">
+                <span class="label label-success label-as-badge">{{discount.discount}}</span>
+            </div>
+        </h1>
+        <p>{{discount.description}}</p>
+        <p>{{address.address}}</p>
+        <a ng-href="discount.link">{{discount.link}}</a>
+        <hr/>
+        <p style="font-size: 22px">
+            <rating ng-model="discount.rating" max="10" readonly="discount.ratingable"
+                    on-hover="hoveringOver(value)"
+                    ng-click="saveRating(discount)">
+            </rating> <b>(<i>Рейтинг:</i> {{discount.rating}})</b>
+        </p>
+        <hr/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <dir-disqus disqus-shortname="itechdiscout"
+                    disqus-identifier="{{ discount.id }}"
+                    disqus-url="http://localhost:9000/{{discountId}}">
+        </dir-disqus>
+    </div>
+</div>
