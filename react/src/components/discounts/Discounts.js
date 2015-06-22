@@ -16,11 +16,11 @@ var Discounts = React.createClass({
     render: function(){
         return (
           <div className="Discounts row">
-            <div className='col-md-4'>
+            <div className='col-md-4 npr'>
                 <DiscountFilters />
                 <DiscountsList discounts={this.state.discounts} />
             </div>
-            <div className='col-md-8'>
+            <div className='col-md-8 npl npr'>
               <GoogleMap discounts={this.state.discounts}></GoogleMap>
             </div>
           </div>
