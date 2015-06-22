@@ -18,7 +18,7 @@ namespace :image_upload do
   end
 
   desc "upload all default images"
-  task :all => [:default_discount_pictures, :default_category_pictures]
+  task :all => [:default_discount_pictures, :default_category_pictures, :icons]
 
   desc "upload category icons"
   task :icons  => :environment do
