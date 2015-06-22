@@ -1,11 +1,11 @@
 'use strict';
 
 var React = require('react/addons');
+var MakersBuilder = require('../services/MarkersBuilder');
 import {Gmaps, Marker} from 'react-gmaps';
 //var Actions = require('actions/xxx')
 
 require('styles/GoogleMap.sass');
-
 
 const coords = {
     lat: 53.9,
@@ -13,6 +13,9 @@ const coords = {
 };
 
 var GoogleMap = React.createClass({
+    getInitialState: function(){
+        return {markers: MakersBuilder.build(this.props.discounts)};
+    },
 
     onMapCreated: function () {
         console.log('onMapCreated', this.refs.Gmaps.getMap());
@@ -30,23 +33,27 @@ var GoogleMap = React.createClass({
     },
 
     render: function() {
+        var Markers = []
+        MakersBuilder.build(this.props.discounts).forEach(function(marker, i){
+            Markers.push(
+                <Marker key={marker.id} lat={marker.lat} lng={marker.lng} draggable={true} icon={marker.icon} />
+            );
+        });
+        var Map = this.props.discounts ? (<Gmaps
+            ref='Gmaps'
+            width={'auto'}
+            height={'100vh'}
+            lat={coords.lat}
+            lng={coords.lng}
+            zoom={12}
+            onMapCreated={this.onMapCreated}
+            onClick={this.onClick}>
+            {Markers}
+        </Gmaps>) : ''
+        debugger;
         return (
             <div>
-                <Gmaps
-                    ref='Gmaps'
-                    width={'auto'}
-                    height={'100vh'}
-                    lat={coords.lat}
-                    lng={coords.lng}
-                    zoom={13}
-                    onMapCreated={this.onMapCreated}
-                    onClick={this.onClick}>
-                    <Marker
-                        lat={coords.lat}
-                        lng={coords.lng}
-                        draggable={true}
-                        onDragEnd={this.onDragEnd} />
-                </Gmaps>
+                {Map}
             </div>
         );
     }
