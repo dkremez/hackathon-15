@@ -3,7 +3,7 @@
 var React = require('react/addons');
 var Reflux = require('reflux');
 var DiscountsList = require('./DiscountsList');
-var GoogleMap = require('./../GoogleMap');
+var GoogleMap = require('./GoogleMap');
 var DiscountFilters = require('./DiscountFilters');
 var DiscountsStore = require('../../stores/DiscountsStore');
 

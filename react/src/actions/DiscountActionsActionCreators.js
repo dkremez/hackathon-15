@@ -5,8 +5,9 @@ var Reflux = require('reflux');
 var DiscountActionsActionCreators  =  Reflux.createActions([
   'getDiscounts',
   'filterDiscounts',
-  'getDiscount'
+  'getDiscount',
+  'searchFilter'
 ]);
 
 
-module.exports = DiscountActionsActionCreators; 
+module.exports = DiscountActionsActionCreators;
