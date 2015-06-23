@@ -24,7 +24,7 @@ var DiscountsStore = Reflux.createStore({
   },
   filterByCategory: function (category_id) {
     this.discounts = _.filter(this.allDiscounts, function (d) {
-      return d.category.id == category_id
+      return d.category.id === parseInt(category_id);
     });
     this.trigger(this.discounts);
   },

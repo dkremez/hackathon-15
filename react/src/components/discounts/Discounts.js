@@ -13,19 +13,19 @@ require('styles/Discounts.sass');
 
 var Discounts = React.createClass({
     mixins: [Reflux.connect(DiscountsStore, 'discounts')],
-    render: function(){
+    render: function () {
         return (
-          <div className="Discounts row">
-            <div className='col-md-4 npr'>
-                <DiscountFilters discounts={this.state.discounts} />
-                <DiscountsList discounts={this.state.discounts} />
+            <div className="Discounts row">
+                <div className='col-md-4 npr'>
+                    <DiscountFilters discounts={this.state.discounts} />
+                    <DiscountsList discounts={this.state.discounts} />
+                </div>
+                <div className='col-md-8 npl npr'>
+                    <GoogleMap discounts={this.state.discounts}></GoogleMap>
+                </div>
             </div>
-            <div className='col-md-8 npl npr'>
-              <GoogleMap discounts={this.state.discounts}></GoogleMap>
-            </div>
-          </div>
         );
-  }
+    }
 });
 
 module.exports = Discounts;

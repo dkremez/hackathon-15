@@ -25,6 +25,7 @@ function makeMarker(discount) {
 
 var MarkersBuilder = {
     build: function (discounts){
+        markers = [];
         _.map(discounts, makeMarker);
 
         return markers;
