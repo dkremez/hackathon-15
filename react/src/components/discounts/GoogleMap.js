@@ -34,12 +34,20 @@ var GoogleMap = React.createClass({
         mountMarker: function (marker) {
             var map = this.refs.Gmaps.getMap();
             var myLatlng = new google.maps.LatLng(marker.lat, marker.lng);
+            var pinIcon = new google.maps.MarkerImage(
+                marker.icon.url,
+                null, /* size is determined at runtime */
+                null, /* origin is 0,0 */
+                null, /* anchor is bottom center of the scaled image */
+                new google.maps.Size(50, 60)
+            );
             var googleMarker = new google.maps.Marker({
                 position: myLatlng,
                 title: marker.title,
                 draggable: false,
-                icon: marker.icon
+                icon: pinIcon
             });
+
             this.markers.push(googleMarker);
 
             googleMarker.setMap(map);
