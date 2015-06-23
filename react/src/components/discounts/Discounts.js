@@ -17,7 +17,7 @@ var Discounts = React.createClass({
         return (
           <div className="Discounts row">
             <div className='col-md-4 npr'>
-                <DiscountFilters />
+                <DiscountFilters discounts={this.state.discounts} />
                 <DiscountsList discounts={this.state.discounts} />
             </div>
             <div className='col-md-8 npl npr'>

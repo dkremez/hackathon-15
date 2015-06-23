@@ -13,10 +13,15 @@ const coords = {
 };
 
 var GoogleMap = React.createClass({
+    map: null,
     getInitialState: function(){
         return {markers: MakersBuilder.build(this.props.discounts)};
     },
-
+    componentDidMount: function () {
+        if(this.map !== null && this.map.clearMarkers){
+            this.map.clearMarkers();
+        }
+    },
     onMapCreated: function () {
         console.log('onMapCreated', this.refs.Gmaps.getMap());
         this.refs.Gmaps.getMap().setOptions({
@@ -32,26 +37,26 @@ var GoogleMap = React.createClass({
         console.log('onDragEnd', e);
     },
 
+    newGmap: function(Markers){
+        return new React.createElement(Gmaps, {
+            ref: "Gmaps",
+            width: "auto",
+            height: "100vh",
+            lat: coords.lat,
+            lng: coords.lng,
+            zoom: 12,
+            onMapCreated: this.onMapCreated,
+            onClick: this.onClick,
+            discounts: this.props.discounts }, Markers);
+    },
     render: function() {
         var Markers = [];
         MakersBuilder.build(this.props.discounts).forEach(function(marker){
             Markers.push(
-                <Marker key={marker.id} lat={marker.lat} lng={marker.lng} draggable={true} icon={marker.icon} />
+                <Marker key={marker.id} lat={marker.lat} lng={marker.lng} draggable={true} icon={marker.icon}  />
             );
         });
-        var Map = this.props.discounts ? (
-            <Gmaps
-                ref='Gmaps'
-                width={'auto'}
-                height={'100vh'}
-                lat={coords.lat}
-                lng={coords.lng}
-                zoom={12}
-                onMapCreated={this.onMapCreated}
-                onClick={this.onClick}
-                discounts{this.props.discounts}>
-              {Markers}
-            </Gmaps>) : '';
+        var Map = this.props.discounts ? this.newGmap(Markers) : '';
         return (
             <div>
                 {Map}

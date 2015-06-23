@@ -13,10 +13,19 @@ var DiscountsStore = Reflux.createStore({
   sourceUrl: apiEndpoint + '/discounts',
 
   init: function () {
-      this.getDiscounts();
+    this.getDiscounts();
   },
-  searchFilter: function(text) {
-    this.discounts =  _.filter(this.allDiscounts, function(d){ return _.startsWith(d.title, text) || d.description.includes(text); });
+  searchFilter: function (text) {
+    var query = text.toLowerCase();
+    this.discounts = _.filter(this.allDiscounts, function (d) {
+      return d.title.toLowerCase().includes(query) || d.description.toLowerCase().includes(query);
+    });
+    this.trigger(this.discounts);
+  },
+  filterByCategory: function (category_id) {
+    this.discounts = _.filter(this.allDiscounts, function (d) {
+      return d.category.id == category_id
+    });
     this.trigger(this.discounts);
   },
   getDiscounts: function () {

@@ -6,7 +6,9 @@ var DiscountActionsActionCreators  =  Reflux.createActions([
   'getDiscounts',
   'filterDiscounts',
   'getDiscount',
-  'searchFilter'
+  'searchFilter',
+  'getCategories',
+  'filterByCategory'
 ]);
 
 
