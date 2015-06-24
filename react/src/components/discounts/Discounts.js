@@ -21,7 +21,7 @@ var Discounts = React.createClass({
           <DiscountsList discounts={this.state.discounts}/>
         </div>
         <div className='col-md-8 npl npr'>
-          <GoogleMap discounts={this.state.discounts}></GoogleMap>
+          <GoogleMap/>
         </div>
       </div>
     );

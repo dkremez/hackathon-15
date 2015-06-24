@@ -4,7 +4,7 @@ var React = require('react/addons');
 var Reflux = require('reflux');
 var MarkersStore = require('../../stores/MarkersStore');
 var Gmaps = require('react-gmaps').Gmaps;
-//var Actions = require('actions/xxx')
+var google = global.google;
 
 require('styles/GoogleMap.sass');
 
@@ -17,10 +17,12 @@ var GoogleMap = React.createClass({
   mixins: [Reflux.connect(MarkersStore, 'markers')],
   mapCreated: false,
   oldMarkers: [],
+  map: null,
 
   onMapCreated: function () {
     console.log('onMapCreated', this.refs.Gmaps.getMap());
-    this.refs.Gmaps.getMap().setOptions({
+    this.map = this.refs.Gmaps.getMap();
+    this.map.setOptions({
       disableDefaultUI: true
     });
     this.state.markers.forEach(this.mountMarker);
@@ -33,8 +35,12 @@ var GoogleMap = React.createClass({
 
   mountMarker: function (marker) {
     this.oldMarkers.push(marker);
-    var map = this.refs.Gmaps.getMap();
-    marker.setMap(map);
+    google.maps.event.addListener(marker, 'click', this.highlight);
+    marker.setMap(this.map);
+  },
+
+  highlight: function () {
+    console.log('Welcome!');
   },
 
   onClick: function (e) {
@@ -50,7 +56,7 @@ var GoogleMap = React.createClass({
       this.oldMarkers.forEach(this.clearMarker);
       this.state.markers.forEach(this.mountMarker);
     }
-    if (this.props.discounts) {
+    if (this.state.markers) {
       return (
         <div>
           <Gmaps

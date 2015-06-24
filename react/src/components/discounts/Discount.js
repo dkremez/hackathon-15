@@ -26,7 +26,7 @@ var Discount = React.createClass({
     if (this.props.discount.addresses) {
       Addresses = this.props.discount.addresses.map(function (address) {
         return (
-          <li>
+          <li key={address.id}>
             <Address address={address}/>
           </li>
         );

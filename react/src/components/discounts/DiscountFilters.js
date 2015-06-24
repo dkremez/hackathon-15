@@ -22,7 +22,7 @@ var DiscountFilters = React.createClass({
     var Options = [];
     if (this.state.categories) {
       Options = this.state.categories.map(function (category) {
-        return <option value={category.id}>{category.name}</option>;
+        return <option key={category.id} value={category.id}>{category.name}</option>;
       });
     }
     return (
