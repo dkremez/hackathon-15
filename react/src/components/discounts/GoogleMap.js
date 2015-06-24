@@ -1,9 +1,9 @@
 'use strict';
 
 var React = require('react/addons');
-var MakersBuilder = require('../../services/MarkersBuilder');
+var Reflux = require('reflux');
+var MarkersStore = require('../../stores/MarkersStore');
 import {Gmaps, Marker} from 'react-gmaps';
-var google = window.google;
 //var Actions = require('actions/xxx')
 
 require('styles/GoogleMap.sass');
@@ -14,43 +14,27 @@ const coords = {
 };
 
 var GoogleMap = React.createClass({
-        markers: [],
+        mixins: [Reflux.connect(MarkersStore, 'markers')],
         mapCreated: false,
+        oldMarkers: [],
 
         onMapCreated: function () {
             console.log('onMapCreated', this.refs.Gmaps.getMap());
             this.refs.Gmaps.getMap().setOptions({
                 disableDefaultUI: true
             });
-            MakersBuilder.build(this.props.discounts).forEach(this.mountMarker);
+            this.state.markers.forEach(this.mountMarker);
             this.mapCreated = true;
         },
 
         clearMarker: function (marker) {
             marker.setMap(null);
-
         },
 
         mountMarker: function (marker) {
+            this.oldMarkers.push(marker);
             var map = this.refs.Gmaps.getMap();
-            var myLatlng = new google.maps.LatLng(marker.lat, marker.lng);
-            var pinIcon = new google.maps.MarkerImage(
-                marker.icon.url,
-                null, /* size is determined at runtime */
-                null, /* origin is 0,0 */
-                null, /* anchor is bottom center of the scaled image */
-                new google.maps.Size(50, 60)
-            );
-            var googleMarker = new google.maps.Marker({
-                position: myLatlng,
-                title: marker.title,
-                draggable: false,
-                icon: pinIcon
-            });
-
-            this.markers.push(googleMarker);
-
-            googleMarker.setMap(map);
+            marker.setMap(map);
         },
 
         onClick: function (e) {
@@ -62,12 +46,11 @@ var GoogleMap = React.createClass({
         },
 
         render: function () {
-            this.markers.forEach(this.clearMarker);
-            if(this.mapCreated) {
-                this.markers = [];
-                MakersBuilder.build(this.props.discounts).forEach(this.mountMarker);
+            if (this.mapCreated) {
+                this.oldMarkers.forEach(this.clearMarker);
+                this.state.markers.forEach(this.mountMarker);
             }
-            if (this.props.discounts){
+            if (this.props.discounts) {
                 return (
                     <div>
                         <Gmaps
@@ -78,8 +61,7 @@ var GoogleMap = React.createClass({
                             lng={coords.lng}
                             zoom={12}
                             onMapCreated={this.onMapCreated}
-                            onClick={this.onClick}>
-                        </Gmaps>
+                            onClick={this.onClick}/>
                     </div>
 
                 );

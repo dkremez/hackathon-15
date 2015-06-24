@@ -3,6 +3,7 @@
 var React = require('react/addons');
 var Address = require('../Address');
 var apiEndpoint = require('../../constants/endpoints');
+var MarkerActions = require('actions/MarkerActionCreators');
 
 //var Actions = require('actions/xxx')
 
@@ -14,6 +15,11 @@ var Discount = React.createClass({
     },
 
     toogleAddress: function () {
+        if(!this.state.showAddress){
+            MarkerActions.filterByDiscountId(this.props.discount.id);
+        } else {
+            MarkerActions.filterByDiscountId(null);
+        }
         this.setState({showAddress: !this.state.showAddress});
     },
 
