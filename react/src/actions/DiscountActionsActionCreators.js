@@ -2,7 +2,7 @@
 
 var Reflux = require('reflux');
 
-var DiscountActionsActionCreators  =  Reflux.createActions([
+var DiscountActionsActionCreators = Reflux.createActions([
   'getDiscounts',
   'filterDiscounts',
   'getDiscount',
@@ -10,6 +10,5 @@ var DiscountActionsActionCreators  =  Reflux.createActions([
   'getCategories',
   'filterByCategory'
 ]);
-
 
 module.exports = DiscountActionsActionCreators;

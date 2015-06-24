@@ -2,9 +2,8 @@
 
 var Reflux = require('reflux');
 
-var MarkerActionCreators  =  Reflux.createActions([
-    'filterByDiscountId'
+var MarkerActionCreators = Reflux.createActions([
+  'filterByDiscountId'
 ]);
-
 
 module.exports = MarkerActionCreators;

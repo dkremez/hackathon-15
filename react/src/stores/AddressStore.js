@@ -1,13 +1,9 @@
 'use strict';
 
 var Reflux = require('reflux');
-//var Actions = require('actions/..');
-
 
 var AddressStore = Reflux.createStore({
-  listenables: Actions,
-
-
+  listenables: []
 });
 
-module.exports = AddressStore; 
+module.exports = AddressStore;

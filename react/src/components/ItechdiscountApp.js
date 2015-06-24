@@ -11,7 +11,7 @@ require('../styles/main.css');
 var imageURL = require('../images/yeoman.png');
 
 var ItechdiscountApp = React.createClass({
-  render: function() {
+  render: function () {
     return (
       <div className='main'>
         <Discounts></Discounts>
