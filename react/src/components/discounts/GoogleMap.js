@@ -3,12 +3,12 @@
 var React = require('react/addons');
 var Reflux = require('reflux');
 var MarkersStore = require('../../stores/MarkersStore');
-import {Gmaps, Marker} from 'react-gmaps';
+var Gmaps = require('react-gmaps').Gmaps;
 //var Actions = require('actions/xxx')
 
 require('styles/GoogleMap.sass');
 
-const coords = {
+var coords = {
   lat: 53.9,
   lng: 27.5667
 };
